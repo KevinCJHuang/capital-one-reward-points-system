@@ -1,0 +1,27 @@
+{
+  "name": "capital-one-reward-points-system",
+  "version": "1.0.0",
+  "description": "This project is created for Caiptal One's new grad software engineer assessment. It calculates the maximum reward points of a given set of transactions.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinCJHuang/capital-one-reward-points-system.git"
+  },
+  "author": "KevinCJHuang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinCJHuang/capital-one-reward-points-system/issues"
+  },
+  "homepage": "https://github.com/KevinCJHuang/capital-one-reward-points-system#readme",
+  "dependencies": {
+    "config": "^3.3.8",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

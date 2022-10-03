@@ -1,0 +1,22 @@
+{
+  "transactions": [
+    {
+      "id": "T1",
+      "date": "2021-05-09",
+      "merchant_code": "sportcheck",
+      "amount_cents": 2500
+    },
+    {
+      "id": "T2",
+      "date": "2021-05-10",
+      "merchant_code": "tim_hortons",
+      "amount_cents": 1000
+    },
+    {
+      "id": "T3",
+      "date": "2021-05-10",
+      "merchant_code": "the_bay",
+      "amount_cents": 500
+    }
+  ]
+}

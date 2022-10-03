@@ -5,7 +5,8 @@ const Rules = require('../models/rules');
 const Transactions = require('../models/transactions');
 const router = express.Router();
 
-// Permutates over inputArr
+// Returns a permutation of the inputArr.
+// E.g. [1,2,3] => [[1,2,3], [1,3,2], [2,1,3] ... [3,2,1]]
 const permutator = (inputArr) => {
   let result = [];
 
@@ -26,6 +27,8 @@ const permutator = (inputArr) => {
   return result;
 };
 
+// Calculates the max reward based on input transactions and permutation
+// of rules
 const calcRewards = (transactions, rulesPermutation) => {
   const transactionsCopy = JSON.stringify(transactions);
   const bestReward = { rewardPoints: 0 };

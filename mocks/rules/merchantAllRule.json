@@ -1,0 +1,14 @@
+{
+  "rules": [
+    {
+      "id": 7,
+      "requirements": [
+        {
+          "merchant_code": "all",
+          "amount_cents": 100
+        }
+      ],
+      "reward": 1
+    }
+  ]
+}

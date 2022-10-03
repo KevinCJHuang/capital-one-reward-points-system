@@ -49,9 +49,14 @@ const calcRewards = (transactions, rulesPermutation) => {
 // @access      Public
 router.post('/', async (req, res) => {
   try {
-    const rules = JSON.parse(fs.readFileSync(config.get('path_to_rules')));
-    const rulesPermutation = permutator(rules.rules);
+    // Parse rules and transactions
+    const rules =
+      req.body.rules ??
+      JSON.parse(fs.readFileSync(config.get('PATH_TO_DEFAULT_RULES'))).rules;
+
+    const rulesPermutation = permutator(rules);
     const transactions = req.body.transactions;
+
     // Calculate rewards from all transactions
     const rewardFromAll = calcRewards(transactions, rulesPermutation);
 
@@ -70,6 +75,10 @@ router.post('/', async (req, res) => {
   } catch (err) {
     res.status(500, 'Internal Server Error');
   }
+});
+
+router.post('/test', async (req, res) => {
+  return res.json({ test: 'success' });
 });
 
 module.exports = router;

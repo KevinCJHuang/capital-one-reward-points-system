@@ -3,10 +3,12 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/api/rewards', require('./routes/rewards'));
+app.use('/api/reward', require('./routes/reward'));
 
 const PORT = 5001;
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`Api listening on port ${PORT}`);
 });
+
+module.exports = app;

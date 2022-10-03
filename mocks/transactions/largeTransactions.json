@@ -1,0 +1,55 @@
+{
+  "transactions": [
+    {
+      "id": "T1",
+      "merchant_code": "sportchek",
+      "amount_cents": 21000
+    },
+    {
+      "id": "T2",
+
+      "merchant_code": "sportchek",
+      "amount_cents": 8700
+    },
+    {
+      "id": "T3",
+      "merchant_code": "tim_hortons",
+      "amount_cents": 323
+    },
+    {
+      "id": "T4",
+      "merchant_code": "tim_hortons",
+      "amount_cents": 1267
+    },
+    {
+      "id": "T5",
+      "merchant_code": "tim_hortons",
+      "amount_cents": 2116
+    },
+    {
+      "id": "T6",
+      "merchant_code": "tim_hortons",
+      "amount_cents": 2211
+    },
+    {
+      "id": "T7",
+      "merchant_code": "subway",
+      "amount_cents": 1853
+    },
+    {
+      "id": "T8",
+      "merchant_code": "subway",
+      "amount_cents": 2153
+    },
+    {
+      "id": "T1",
+      "merchant_code": "sportchek",
+      "amount_cents": 7126
+    },
+    {
+      "id": "T9",
+      "merchant_code": "tim_hortons",
+      "amount_cents": 1321
+    }
+  ]
+}

@@ -23,10 +23,10 @@ describe('rewardRoutes', () => {
         .set('Content-type', 'application/json')
         .expect(200)
         .then((res) => {
-          expect(res.body.rewardFromAll.rewardPoints).toBe(40);
-          expect(res.body.rewardsFromSingle.T1.rewardPoints).toBe(25);
-          expect(res.body.rewardsFromSingle.T2.rewardPoints).toBe(10);
-          expect(res.body.rewardsFromSingle.T3.rewardPoints).toBe(5);
+          expect(res.body.rewardFromAll).toBe(40);
+          expect(res.body.rewardsFromSingle.T1).toBe(25);
+          expect(res.body.rewardsFromSingle.T2).toBe(10);
+          expect(res.body.rewardsFromSingle.T3).toBe(5);
         });
     });
 
@@ -43,10 +43,10 @@ describe('rewardRoutes', () => {
         .set('Content-type', 'application/json')
         .expect(200)
         .then((res) => {
-          expect(res.body.rewardFromAll.rewardPoints).toBe(95);
-          expect(res.body.rewardsFromSingle.T1.rewardPoints).toBe(80);
-          expect(res.body.rewardsFromSingle.T2.rewardPoints).toBe(10);
-          expect(res.body.rewardsFromSingle.T3.rewardPoints).toBe(5);
+          expect(res.body.rewardFromAll).toBe(95);
+          expect(res.body.rewardsFromSingle.T1).toBe(80);
+          expect(res.body.rewardsFromSingle.T2).toBe(10);
+          expect(res.body.rewardsFromSingle.T3).toBe(5);
         });
     });
   });

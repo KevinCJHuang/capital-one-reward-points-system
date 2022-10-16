@@ -12,8 +12,8 @@ class Rule {
     this.reward = reward;
   }
 
-  reduce = (transactionsObj) => {
-    const { rulesApplied, transactions } = transactionsObj;
+  applyOn = (transactionsObj) => {
+    const { transactions } = transactionsObj;
 
     // If this rule matches all the merchant_code, check all merchant_codes
     if (this.requirements[0].merchant_code === 'all') {
@@ -22,8 +22,6 @@ class Rule {
         if (transactions[merchant_code] >= amount_cents) {
           transactions[merchant_code] -= amount_cents;
           transactionsObj.rewardPoints += this.reward;
-          rulesApplied[this.id] =
-            this.id in rulesApplied ? rulesApplied[this.id] + 1 : 1;
           return true;
         }
       }
@@ -50,8 +48,6 @@ class Rule {
       });
 
       transactionsObj.rewardPoints += this.reward;
-      rulesApplied[this.id] =
-        this.id in rulesApplied ? rulesApplied[id] + 1 : 1;
 
       return true;
     }

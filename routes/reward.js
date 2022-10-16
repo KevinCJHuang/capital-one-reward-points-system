@@ -1,50 +1,61 @@
 const express = require('express');
 const fs = require('fs');
 const config = require('config');
-const Rules = require('../models/rules');
+
 const Transactions = require('../models/transactions');
+const Rule = require('../models/rule');
+const permutate = require('../utils/permutator');
+
 const router = express.Router();
-
-// Returns a permutation of the inputArr.
-// E.g. [1,2,3] => [[1,2,3], [1,3,2], [2,1,3] ... [3,2,1]]
-const permutator = (inputArr) => {
-  let result = [];
-
-  const permute = (arr, m = []) => {
-    if (arr.length === 0) {
-      result.push(m);
-    } else {
-      for (let i = 0; i < arr.length; i++) {
-        let curr = arr.slice();
-        let next = curr.splice(i, 1);
-        permute(curr.slice(), m.concat(next));
-      }
-    }
-  };
-
-  permute(inputArr);
-
-  return result;
-};
 
 // Calculates the max reward based on input transactions and permutation
 // of rules
-const calcRewards = (transactions, rulesPermutation) => {
-  const transactionsCopy = JSON.stringify(transactions);
-  const bestReward = { rewardPoints: 0 };
-
-  rulesPermutation.forEach((ruleArr) => {
-    const transactions = new Transactions(JSON.parse(transactionsCopy));
-    const curRules = new Rules(ruleArr);
-
-    const { rewardPoints, rulesApplied } =
-      curRules.calculateReward(transactions);
-    if (rewardPoints > bestReward.rewardPoints) {
-      bestReward['rewardPoints'] = rewardPoints;
-      bestReward['rulesApplied'] = rulesApplied;
-    }
+const calcRewards = (transactionsData, rules) => {
+  // Initialize dp array. The dp array is an array of Maps with this structure:
+  // - key:     a string representation of an array
+  // - values:  { remainingTransactions, rewardPoints }
+  const initialMap = new Map();
+  initialMap.set('[]', {
+    remainingTransactions: transactionsData,
+    rewardPoints: 0,
   });
-  return bestReward;
+  dp = [initialMap];
+
+  // Iterate through different length of rulesets from 1...n
+  for (var i = 1; i < rules.length + 1; i++) {
+    dp.push(new Map());
+
+    // Permutation of all rules with lenght i.
+    const rulesPermutation = permutate(rules, i);
+
+    rulesPermutation.forEach((ruleSet) => {
+      // Split ruleSet into [1...n-1], and n
+      const newRule = ruleSet.pop();
+      const prevRulesIds = ruleSet.map((rule) => rule.id);
+
+      // Get previous remaining transactions and best results
+      const { remainingTransactions, rewardPoints } = dp[i - 1].get(
+        JSON.stringify(prevRulesIds)
+      );
+
+      // Create transaction object, and apply the new rule
+      transactionsObj = new Transactions(remainingTransactions);
+      transactionsObj.applyRule(new Rule(newRule));
+
+      // Push results onto dp array
+      dp[i].set(JSON.stringify([...prevRulesIds, newRule.id]), {
+        remainingTransactions: transactionsObj.transactions,
+        rewardPoints: rewardPoints + transactionsObj.rewardPoints,
+      });
+    });
+  }
+
+  // Find and return max reward points
+  var maxRewardPoints = 0;
+  for (const [key, value] of dp[rules.length]) {
+    maxRewardPoints = Math.max(maxRewardPoints, value['rewardPoints']);
+  }
+  return maxRewardPoints;
 };
 
 // @route       POST /api/rewards/
@@ -56,17 +67,15 @@ router.post('/', async (req, res) => {
     const rules =
       req.body.rules ??
       JSON.parse(fs.readFileSync(config.get('PATH_TO_DEFAULT_RULES'))).rules;
-
-    const rulesPermutation = permutator(rules);
     const transactions = req.body.transactions;
 
     // Calculate rewards from all transactions
-    const rewardFromAll = calcRewards(transactions, rulesPermutation);
+    const rewardFromAll = calcRewards(transactions, rules);
 
     // Calculate rewards from single transaction
     const rewardsFromSingle = {};
     transactions.forEach((transaction) => {
-      const bestReward = calcRewards([transaction], rulesPermutation);
+      const bestReward = calcRewards([transaction], rules);
       rewardsFromSingle[transaction.id] = bestReward;
     });
 
@@ -78,10 +87,6 @@ router.post('/', async (req, res) => {
   } catch (err) {
     res.status(500, 'Internal Server Error');
   }
-});
-
-router.post('/test', async (req, res) => {
-  return res.json({ test: 'success' });
 });
 
 module.exports = router;

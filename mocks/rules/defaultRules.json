@@ -4,7 +4,7 @@
       "id": 1,
       "requirements": [
         {
-          "merchant_code": "sportcheck",
+          "merchant_code": "sportchek",
           "amount_cents": 7500
         },
         {
@@ -22,7 +22,7 @@
       "id": 2,
       "requirements": [
         {
-          "merchant_code": "sportcheck",
+          "merchant_code": "sportchek",
           "amount_cents": 7500
         },
         {
@@ -36,7 +36,7 @@
       "id": 3,
       "requirements": [
         {
-          "merchant_code": "sportcheck",
+          "merchant_code": "sportchek",
           "amount_cents": 7500
         }
       ],
@@ -46,7 +46,7 @@
       "id": 4,
       "requirements": [
         {
-          "merchant_code": "sportcheck",
+          "merchant_code": "sportchek",
           "amount_cents": 2500
         },
         {
@@ -64,7 +64,7 @@
       "id": 5,
       "requirements": [
         {
-          "merchant_code": "sportcheck",
+          "merchant_code": "sportchek",
           "amount_cents": 2500
         },
         {
@@ -78,7 +78,7 @@
       "id": 6,
       "requirements": [
         {
-          "merchant_code": "sportcheck",
+          "merchant_code": "sportchek",
           "amount_cents": 2000
         }
       ],

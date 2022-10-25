@@ -25,7 +25,7 @@ const calcRewards = (transactionsData, rules) => {
   for (var i = 1; i < rules.length + 1; i++) {
     dp.push(new Map());
 
-    // Permutation of all rules with lenght i.
+    // Permutation of all rules with length i.
     const rulesPermutation = permutate(rules, i);
 
     rulesPermutation.forEach((ruleSet) => {
